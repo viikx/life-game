@@ -1,6 +1,4 @@
-.App {
-  text-align: center;
-}
+/* 
 
 .App-logo {
   height: 40vmin;
@@ -35,4 +33,26 @@
   to {
     transform: rotate(360deg);
   }
+} */
+.App {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.control-panel {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+}
+.control-panel button {
+  margin: 10px;
+}
+.container {
+  display: grid;
+  grid-template-columns: repeat(100, 10px);
+  grid-template-rows: repeat(100, 10px);
+
+  box-sizing: border-box;
+  width: 1002px;
+  border: 1px solid #000;
 }
