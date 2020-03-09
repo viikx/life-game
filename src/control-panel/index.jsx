@@ -26,29 +26,48 @@ function ControlPanel({ dispatch, setCell }) {
 
   return (
     <section className="control-panel">
-      宽
-      <input
-        type="number"
-        disabled={isRunning}
-        value={row}
-        onChange={e => {
-          dispatch({ type: "setCellSize", payload: [col, +e.target.value] });
-        }}
-      />
-      高
-      <input
-        type="number"
-        disabled={isRunning}
-        value={col}
-        onChange={e => {
-          dispatch({ type: "setCellSize", payload: [+e.target.value, row] });
-        }}
-      />
+      <div>
+        宽:{" "}
+        <input
+          type="number"
+          disabled={isRunning}
+          value={row}
+          min="1"
+          max="100"
+          onChange={e => {
+            e.target.value <= 100 &&
+              dispatch({
+                type: "setCellSize",
+                payload: [col, +e.target.value]
+              });
+          }}
+        />
+      </div>
+
+      <div>
+        高:{" "}
+        <input
+          type="number"
+          disabled={isRunning}
+          value={col}
+          min="1"
+          max="100"
+          onChange={e => {
+            e.target.value <= 100 &&
+              dispatch({
+                type: "setCellSize",
+                payload: [+e.target.value, row]
+              });
+          }}
+        />
+      </div>
       <button onClick={() => dispatch({ type: "edit" })}>
         手动设置点位状态
       </button>
       <button onClick={() => handleRandomCellState()}>随机点位状态</button>
-      <button onClick={() => dispatch({ type: "run" })}>开始</button>
+      <button onClick={() => dispatch({ type: isRunning ? "stop" : "run" })}>
+        {isRunning ? "暂停" : "开始"}
+      </button>
       <div>
         速度：
         <input
@@ -63,7 +82,6 @@ function ControlPanel({ dispatch, setCell }) {
         />
         {delay}ms
       </div>
-      <button onClick={() => dispatch({ type: "stop" })}>暂停</button>
       <button onClick={() => handleResetCellState()}>重置</button>
     </section>
   );

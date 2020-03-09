@@ -90,32 +90,34 @@ function App() {
   return (
     <AppContext.Provider value={state}>
       <div className="App">
-        <section
-          className="container"
-          style={{
-            gridTemplateColumns: `repeat(${state.cellSize[1]}, 10px)`,
-            gridTemplateRows: `repeat(${state.cellSize[0]}, 10px)`,
-            width: state.cellSize[1] * 10 + 2,
-            height: state.cellSize[0] * 10 + 2
-          }}
-        >
-          {cell.map((item, i) =>
-            item.map((it, j) => (
-              <div
-                onClick={() => {
-                  handleChangeCellState(i, j);
-                }}
-                style={{
-                  backgroundColor: it === 0 ? `#fff` : `#000`,
-                  border: ` solid #000`,
-                  width: 10,
-                  height: 10,
-                  borderWidth: isEditing ? `0.5px` : `0`
-                }}
-                key={`${i}-${j}`}
-              ></div>
-            ))
-          )}
+        <section className="warpper">
+          <section
+            className="container"
+            style={{
+              gridTemplateColumns: `repeat(${state.cellSize[1]}, 10px)`,
+              gridTemplateRows: `repeat(${state.cellSize[0]}, 10px)`,
+              width: state.cellSize[1] * 10 + 2,
+              height: state.cellSize[0] * 10 + 2
+            }}
+          >
+            {cell.map((item, i) =>
+              item.map((it, j) => (
+                <div
+                  onClick={() => {
+                    handleChangeCellState(i, j);
+                  }}
+                  style={{
+                    backgroundColor: it === 0 ? `#fff` : `#ff9800`,
+                    border: ` solid #000`,
+                    width: 10,
+                    height: 10,
+                    borderWidth: isEditing ? `0.5px` : `0`
+                  }}
+                  key={`${i}-${j}`}
+                ></div>
+              ))
+            )}
+          </section>
         </section>
         <ControlPanel {...{ dispatch, setCell }} />
       </div>
